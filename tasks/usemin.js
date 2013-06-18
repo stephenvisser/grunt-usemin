@@ -117,6 +117,7 @@ module.exports = function (grunt) {
     var uglifyName = options.uglify || 'uglify';
     var cssminName = options.cssmin || 'cssmin';
     var dest = options.dest;
+    var cwdPath = options.cwd || '.';
 
     // concat / uglify / cssmin / requirejs config
     var concat = grunt.config('concat') || {};
@@ -131,7 +132,7 @@ module.exports = function (grunt) {
     files = files.map(function (filepath) {
       return {
         path: filepath,
-        body: grunt.file.read(filepath)
+        body: grunt.file.read(cwdPath + '/' + filepath)
       };
     });
 
