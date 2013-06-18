@@ -201,7 +201,7 @@ module.exports = function (grunt) {
         if (block.type === 'js') {
           // TODO: we should differentiate whether or not we're
           // using concat before ... Option ?
-          uglify[block.dest] = block.dest;
+          uglify[block.dest] = block.src;
 
           if (block.requirejs) {
             uglify[block.requirejs.srcDest] = block.requirejs.src;
@@ -211,7 +211,7 @@ module.exports = function (grunt) {
 
         // cssmin config, only for cssmin type block
         if (block.type === 'css') {
-          cssmin[block.dest] = block.dest;
+          cssmin[block.dest] = block.src;
           grunt.config(cssminName, cssmin);
         }
       });
@@ -219,11 +219,11 @@ module.exports = function (grunt) {
 
     // log a bit what was added to config
     grunt.log.subhead('Configuration is now:')
-      .subhead('  cssmin:')
+      .subhead('  ' + cssminName + ':')
       .writeln('  ' + inspect(cssmin))
       .subhead('  concat:')
       .writeln('  ' + inspect(concat))
-      .subhead('  uglify:')
+      .subhead('  ' + uglifyName + ':')
       .writeln('  ' + inspect(uglify))
       .subhead('  requirejs:')
       .writeln('  ' + inspect(requirejs));
